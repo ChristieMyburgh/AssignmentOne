@@ -38,12 +38,9 @@ agg <- aggregate(data[,1], list(date=data$date), FUN=sum, na.rm=TRUE)
 
 
 ```r
-#Get the range of the total steps per day.
-rng <- range(agg$x)
-
 #Creating histogram plot using the aggregated data calculated in chunk above.
 p <- ggplot(agg, aes(agg$x)) + 
-  geom_histogram(binwidth = ceiling(rng[2]/10), col="red", fill="green", alpha= .2) +
+  geom_histogram( col="red", fill="green", alpha= .2) +
   theme(axis.text.x = element_text(size=10),
         axis.text.y = element_text(size=10),
         axis.title.x = element_text(size=15),
@@ -80,7 +77,7 @@ print(xt, type="html", include.rownames=FALSE)
 ```
 
 <!-- html table generated in R 3.1.3 by xtable 1.8-0 package -->
-<!-- Mon Jun 08 16:36:28 2015 -->
+<!-- Mon Jun 08 21:53:33 2015 -->
 <table border=1>
 <caption align="bottom"> Table 1 - Mean and 
              median of total steps per day </caption>
@@ -234,11 +231,9 @@ data2_summary <- data2 %>%
                   group_by(date) %>%
                   summarise(TOTAL = sum(steps))
 
-rng <- range(data2_summary$TOTAL)
-
 #Creating histogram plot.
 pd2 <- ggplot(data2_summary, aes(data2_summary$TOTAL)) + 
-  geom_histogram(binwidth = ceiling(rng[2]/10), col="red", fill="green", alpha= .2) +
+  geom_histogram(col="red", fill="green", alpha= .2) +
   theme(axis.text.x = element_text(size=10),
         axis.text.y = element_text(size=10),
         axis.title.x = element_text(size=15),
@@ -247,7 +242,7 @@ pd2 <- ggplot(data2_summary, aes(data2_summary$TOTAL)) +
         plot.margin=unit(c(3,3,3,2), "mm")) +
   labs(y = "Freguency") +
   labs(x = "Total steps by day") + 
-  labs(title = "Histogram of total steps per day")  
+  labs(title = "Histogram of total steps per day") +
   scale_x_continuous(breaks = c(0, 2500, 5000,7500,10000,12500,15000,17500,20000))
 
 print(pd2)
@@ -258,7 +253,7 @@ print(pd2)
 The impact of the imputed missing values on the total daily number of steps is:
 
 1. It produces a distribution that is more normal in appearance.  The first histogram seemed to be artificially skewed due to the missing values being interpreted as 0 steps for that day.  
-2. There is a more pronounced "peak" in the distribution using the imputed values for the intervals between 10000 and 12500 steps.
+2. There is a more pronounced "peak" in the distribution using the imputed values for the intervals between 10000 and 11250 steps.
 
 ### 3.4 Calculate the mean and median total number of steps per day.
 
@@ -280,7 +275,7 @@ print(xt, type="html", include.rownames=FALSE)
 ```
 
 <!-- html table generated in R 3.1.3 by xtable 1.8-0 package -->
-<!-- Mon Jun 08 16:36:29 2015 -->
+<!-- Mon Jun 08 21:53:34 2015 -->
 <table border=1>
 <caption align="bottom"> Table 2 - Mean and 
              median of total steps per day, including imputed values. </caption>
